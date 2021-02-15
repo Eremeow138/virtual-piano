@@ -15,7 +15,18 @@ piano.addEventListener('mousedown', (event) => {
     const note = event.target.dataset.note;
     const src = `assets/audio-mp3/${note}.mp3`;
     playAudio(src);
+
+    pianoKeys.forEach((el) => {
+      if (el.classList.contains('piano-key-active')) {
+        el.classList.remove('piano-key-active');
+      }
+    });
+    event.target.classList.add('piano-key-active');
   }
 });
 
-
+piano.addEventListener('mouseup', (event) => {
+  if (event.target.classList.contains('piano-key')) {
+    event.target.classList.remove('piano-key-active');
+  }
+});
