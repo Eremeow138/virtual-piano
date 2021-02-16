@@ -59,3 +59,17 @@ window.addEventListener('keyup', (event) => {
     }
   });
 });
+
+const btnContainer = document.querySelector('.btn-container');
+
+btnContainer.addEventListener('click', (event) => {
+  if (event.target.classList.contains('btn') && !event.target.classList.contains('btn-active')) {
+    Array.from(btnContainer.children).forEach((item) => {
+      item.classList.remove('btn-active');
+    });
+    event.target.classList.add('btn-active');
+    pianoKeys.forEach((el) => {
+      el.classList.toggle('letter');
+    });
+  }
+});
