@@ -200,7 +200,7 @@ body {
 
 .github {
   display: block;
-  width: 260px;
+  width: 180px;
   height: 65px;
   padding-left: 65px;
   background-image: url('assets/svg/github-icon.svg');
@@ -220,6 +220,25 @@ body {
   background-image: url('assets/svg/rss.svg');
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.rss_year {
+  width: 220px;
+  padding-right: 100px;
+  position: relative;
+}
+.rss_year::after {
+  content: '2021';
+  display: block;
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial;
+  line-height: 0.7;
+
 }
 
 @media (max-width: 720px) {
@@ -278,5 +297,13 @@ body {
     right: 20px;
     width: 30px;
     height: 30px;
+  }
+}
+
+@media (max-width: 425px) {
+  .footer-container{
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 30px;
   }
 }
