@@ -4,6 +4,10 @@ const piano = document.querySelector('.piano');
 
 const pianoKeys = document.querySelectorAll('.piano-key');
 
+const btnContainer = document.querySelector('.btn-container');
+
+const btnFullScreen = document.querySelector('.fullscreen');
+
 let isPressed = false;
 
 function playAudio(src) {
@@ -60,8 +64,6 @@ window.addEventListener('keyup', (event) => {
   });
 });
 
-const btnContainer = document.querySelector('.btn-container');
-
 btnContainer.addEventListener('click', (event) => {
   if (
     event.target.classList.contains('btn') &&
@@ -77,7 +79,6 @@ btnContainer.addEventListener('click', (event) => {
   }
 });
 
-const btnFullScreen = document.querySelector('.fullscreen');
 
 btnFullScreen.addEventListener('click', (event) => {
   if (document.fullscreenElement !== null) {
