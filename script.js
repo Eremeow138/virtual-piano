@@ -16,22 +16,40 @@ function playAudio(src) {
   auduo.play();
 }
 
-piano.addEventListener('mousedown', (event) => {
+pianoKeys.forEach((item) => {
+  item.ondragstart = function () {
+    return false;
+  };
+});
+
+let isMousePress = false;
+
+document.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('piano-key')) {
     const note = event.target.dataset.note;
     const src = `assets/audio-mp3/${note}.mp3`;
     playAudio(src);
-
-    pianoKeys.forEach((el) => {
-      if (el.classList.contains('piano-key-active')) {
-        el.classList.remove('piano-key-active');
-      }
-    });
     event.target.classList.add('piano-key-active');
+    isMousePress = true;
   }
 });
 
-piano.addEventListener('mouseup', (event) => {
+document.addEventListener('mouseup', (event) => {
+  if (event.target.classList.contains('piano-key')) {
+    event.target.classList.remove('piano-key-active');
+  }
+  isMousePress = false;
+});
+
+piano.addEventListener('mouseover', (event) => {
+  if (isMousePress) {
+    const note = event.target.dataset.note;
+    const src = `assets/audio-mp3/${note}.mp3`;
+    playAudio(src);
+    event.target.classList.add('piano-key-active');
+  }
+});
+piano.addEventListener('mouseout', (event) => {
   if (event.target.classList.contains('piano-key')) {
     event.target.classList.remove('piano-key-active');
   }
@@ -78,7 +96,6 @@ btnContainer.addEventListener('click', (event) => {
     });
   }
 });
-
 
 btnFullScreen.addEventListener('click', (event) => {
   if (document.fullscreenElement !== null) {
