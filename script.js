@@ -6,6 +6,8 @@ const btnContainer = document.querySelector('.btn-container');
 
 const btnFullScreen = document.querySelector('.fullscreen');
 
+const pressedKeys = {};
+
 // Для каждой клавиши пианино создаем на странице свой плеер
 pianoKeys.forEach((elem) => {
   const note = elem.dataset.note;
@@ -75,21 +77,22 @@ piano.addEventListener('mouseout', (event) => {
 // --начало куска кода для работы с клавиатурой
 
 window.addEventListener('keydown', (event) => {
-  if (event.repeat) {
-    return false;
-  }
-  pianoKeys.forEach((el) => {
-    if (event.code.slice(-1) === el.dataset.letter) {
-      const note = el.dataset.note;
-      if (note) {
-        playAudio(note);
-        el.classList.add('piano-key-active');
+  if (!pressedKeys[event.code]) {
+    pressedKeys[event.code] = true;
+    pianoKeys.forEach((el) => {
+      if (event.code.slice(-1) === el.dataset.letter) {
+        const note = el.dataset.note;
+        if (note) {
+          playAudio(note);
+          el.classList.add('piano-key-active');
+        }
       }
-    }
-  });
+    });
+  }
 });
 
 window.addEventListener('keyup', (event) => {
+  pressedKeys[event.code] = false;
   pianoKeys.forEach((el) => {
     if (event.code.slice(-1) === el.dataset.letter) {
       el.classList.remove('piano-key-active');
