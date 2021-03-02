@@ -79,9 +79,6 @@ window.addEventListener('keydown', (event) => {
     return false;
   }
   pianoKeys.forEach((el) => {
-    if (el.classList.contains('piano-key-active')) {
-      el.classList.remove('piano-key-active');
-    }
     if (event.code.slice(-1) === el.dataset.letter) {
       const note = el.dataset.note;
       if (note) {
