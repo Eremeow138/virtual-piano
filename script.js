@@ -1,4 +1,3 @@
-
 const piano = document.querySelector('.piano');
 
 const pianoKeys = document.querySelectorAll('.piano-key');
@@ -40,7 +39,8 @@ let isMouseDown = false; // флаг что клавиша мышки зажат
 piano.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('piano-key')) {
     const note = event.target.dataset.note;
-    if (note) { // если нота есть у клавиши, то запускаем функцию
+    if (note) {
+      // если нота есть у клавиши, то запускаем функцию
       playAudio(note);
       event.target.classList.add('piano-key-active');
       isMouseDown = true; // клавиша мышки нажата
@@ -73,12 +73,11 @@ piano.addEventListener('mouseout', (event) => {
 // --конец куска кода для работы с мышкой
 
 // --начало куска кода для работы с клавиатурой
-let isKeyPressed = false; // флаг, показывающий нажата ли клавиша клавиатуры, нужен для отмены репита события keydown
+
 window.addEventListener('keydown', (event) => {
-  if (isKeyPressed) {
+  if (event.repeat) {
     return false;
   }
-  isKeyPressed = true;
   pianoKeys.forEach((el) => {
     if (el.classList.contains('piano-key-active')) {
       el.classList.remove('piano-key-active');
@@ -97,7 +96,6 @@ window.addEventListener('keyup', (event) => {
   pianoKeys.forEach((el) => {
     if (event.code.slice(-1) === el.dataset.letter) {
       el.classList.remove('piano-key-active');
-      isKeyPressed = false;
     }
   });
 });
